@@ -1,32 +1,26 @@
-{exec} = require 'child_process'
-
-compile = (what,call)->
-	switch what
-		when 'server'
-			exec 'coffee -o out -c ./*.coffee && coffee -o out/routes -c ./routes/*.coffee',(err,stdout,stderr)->
-				call err
-		when 'statics'
-			exec 'coffee -o public/javascripts -c ./coffeescripts/*.coffee',(err,stdout,stderr)->
-				call err
+{spawn,exec} = require 'child_process'
 
 task 'build', 'compile all files',->
-	compile 'server',(err)->
-		throw err if err
-		console.log 'Server compiled.'
-		compile 'statics',(err)->
-			throw err if err
-			console.log 'Statics compiled.'
+	run 'coffee -o out -c ./*.coffee && coffee -o out/routes -c ./routes/*.coffee'
 
-task 'build:server', 'build server',->
-	compile 'server',(err)->
-		throw err if err
-		console.log 'Server compiled.'
+task 'clean', 'clean up compiled files',->
+	run 'rm -rf out'
 
-task 'build:statics', 'build statics',->
-	compile 'server',(err)->
-		throw err if err
-		console.log 'Statics compiled.'
+task 'run', 'run server',->
+	run 'DEBUG=myapp ./bin/www'
 
-task 'run','run in debug mode',->
-	exec 'DEBUG=myapp ./bin/www',(err,stdout,stderr)->
-		throw err if err
+run = (args...) ->
+  for a in args
+    switch typeof a
+      when 'string' then command = a
+      when 'object'
+        if a instanceof Array then params = a
+        else options = a
+      when 'function' then callback = a
+  
+  command += ' ' + params.join ' ' if params?
+  cmd = spawn '/bin/sh', ['-c', command], options
+  cmd.stdout.on 'data', (data) -> process.stdout.write data
+  cmd.stderr.on 'data', (data) -> process.stderr.write data
+  process.on 'SIGHUP', -> cmd.kill()
+  cmd.on 'exit', (code) -> callback() if callback? and code is 0

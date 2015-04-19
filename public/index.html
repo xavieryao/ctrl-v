@@ -68,8 +68,9 @@
   			console.log('save');
   			var file = editor.getValue(); 
   			$.ajax({
+  				type:'POST',
   				url:'/gists/create',
-  				data:{code:file},
+  				data:{code:file,lang:'js'},
   				success:function(r){
   					alert(r);
   				},
