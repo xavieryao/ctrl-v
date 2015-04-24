@@ -70,7 +70,7 @@
   			$.ajax({
   				type:'POST',
   				url:'/gists/create',
-  				data:{code:file,lang:'js'},
+  				data:{code:file,lang:'js',title:'test'},
   				success:function(r){
   					alert(r);
   				},
