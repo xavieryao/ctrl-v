@@ -16,6 +16,6 @@
     "mysql": "~2.6.2",
     "passport" : "~0.2.1",
     "passport-sina" : "0.1.0",
-    "export-session" : "~1.11.1"
+    "express-session" : "~1.11.1"
   }
 }

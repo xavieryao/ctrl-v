@@ -4,24 +4,28 @@ favicon = require 'serve-favicon'
 logger = require 'morgan'
 cookieParser = require 'cookie-parser'
 bodyParser = require 'body-parser'
+session = require 'express-session';
 
-routes = require './routes/index'
-engine = require './viewEngine'
+auth = require './routes/auth'
 
 app = express()
 
-
-app.engine 'coffee',engine
+app.engine 'coffee',require './viewEngine'
 app.set 'views', path.join __dirname,'../views'
 app.set 'view engine', 'coffee'
 
 app.use logger 'dev'
 app.use bodyParser.json()
 app.use bodyParser.urlencoded extended:false
+app.use session
+	resave:false
+	saveUninitialized: false
+	secret: '42 is a magical number'
 app.use cookieParser()
 app.use express.static path.join __dirname, '../public'
 
-app.use '/',routes
+app.use auth.middleware
+app.use require './routes/index'
 
 app.use (req,res,next)->
 	err = new Error 'Not Found'

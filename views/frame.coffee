@@ -19,6 +19,11 @@ html ->
           ul ".nav.navbar-nav", ->
             li ".active", ->
               a href: "#", "Create"
+            li '#login', ->
+              if @user?
+                a href: '/', @user.screen_name
+              else
+                a href: '/login', 'Login'
     div ".container", ->
       div ".starter-template", ->
         @body
