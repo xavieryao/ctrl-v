@@ -6,13 +6,14 @@ cookieParser = require 'cookie-parser'
 bodyParser = require 'body-parser'
 
 routes = require './routes/index'
-users = require './routes/users'
-gists = require './routes/gists'
+engine = require './viewEngine'
 
 app = express()
 
+
+app.engine 'coffee',engine
 app.set 'views', path.join __dirname,'../views'
-app.set 'view engine', 'ejs'
+app.set 'view engine', 'coffee'
 
 app.use logger 'dev'
 app.use bodyParser.json()
@@ -21,8 +22,6 @@ app.use cookieParser()
 app.use express.static path.join __dirname, '../public'
 
 app.use '/',routes
-app.use '/users', users
-app.use '/gists', gists
 
 app.use (req,res,next)->
 	err = new Error 'Not Found'

@@ -22,7 +22,8 @@ router.post '/create',(req,res,next)->
 	db.query sql,gist,(err,r)->
 		throw err if err
 		fileName = r.insertId
-		fs.writeFile __dirname + "/../../uploads/#{fileName}.#{extension}",req.body.code,flag:'w',(err)->
+		path = __dirname + "/../../uploads/#{fileName}.#{extension}"
+		fs.writeFile path,req.body.code,(err)->
 			if err
 				console.error err
 				next err
