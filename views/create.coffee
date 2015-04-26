@@ -36,11 +36,6 @@ coffeescript ->
 	editor = ace.edit 'editor'
 	editor.setTheme 'ace/theme/monokai'
 	editor.getSession().setMode 'ace/mode/javascript'
-	alert = (msg)->
-		$('#alert_placehoder').html """
-<div class="alert alert-success" role="alert">
-<a class="close" data-dismiss="alert">×</a><span>
-#{msg}</span></div>"""
 	$('#save').click ->
 		console.log 'save'
 		file = editor.getValue()
@@ -52,6 +47,6 @@ coffeescript ->
 				lang: 'js'
 				title: 'test'
 			success: (r)->
-				alert r
+				alert.success r
 			error: (xhr,err)->
-				alert err
+				alert.danger err

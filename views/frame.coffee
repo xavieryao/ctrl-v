@@ -10,6 +10,7 @@ html ->
     script src: "/javascripts/jquery.js"
     comment "最新的 Bootstrap 核心 JavaScript 文件"
     script src: "/javascripts/bootstrap.js"
+    script src: '/javascripts/out/common.js'
   body ->
     nav ".navbar.navbar-default.navbar-fixed-top", ->
       div ".container", ->
