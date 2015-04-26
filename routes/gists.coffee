@@ -15,17 +15,20 @@ router.get '/create',(req,res,next)->
 	if req.user
 		res.render 'create',user:req.user
 	else
-		
 		req.flash 'type','warning'
 		req.flash 'msg','You must login first'
 		res.redirect 'back'
 
 router.post '/create',(req,res,next)->
+	if not req.user?
+		e = new Error 'Unauthorized'
+		e.status = 403
+		return next e
 	gist =
 		title : req.body.title
 		filetype : req.body.lang
 		description : 'NULL'
-		uid : '58882833' 
+		uid : req.user.id
 
 	if req.body.description?
 		gist.description = req.body.description
