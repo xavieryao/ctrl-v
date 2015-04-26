@@ -1,7 +1,9 @@
 {spawn,exec} = require 'child_process'
 
 task 'build', 'compile all files',->
-	run 'coffee -o out -c ./*.coffee && coffee -o out/routes -c ./routes/*.coffee'
+	run """coffee -o out -c ./*.coffee && 
+  coffee -o out/routes -c ./routes/*.coffee &&
+  coffee -o public/javascripts/out/ -c ./coffeescripts/*.coffee"""
 
 task 'clean', 'clean up compiled files',->
 	run 'rm -rf out'

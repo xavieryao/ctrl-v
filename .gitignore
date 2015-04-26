@@ -1,5 +1,6 @@
 .DS_Store
 node_modules/
 out/
+public/javascripts/out
 uploads
 npm-debug.log
