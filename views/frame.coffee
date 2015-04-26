@@ -11,7 +11,7 @@ html ->
     comment "最新的 Bootstrap 核心 JavaScript 文件"
     script src: "./javascripts/bootstrap.js"
   body ->
-    nav ".navbar.navbar-inverse.navbar-fixed-top", ->
+    nav ".navbar.navbar-default.navbar-fixed-top", ->
       div ".container", ->
         div ".navbar-header", ->
           a ".navbar-brand", href: "#", "Gists"
@@ -19,6 +19,7 @@ html ->
           ul ".nav.navbar-nav", ->
             li ".active", ->
               a href: "#", "Create"
+          ul '.nav.navbar-nav.navbar-right',->
             li '#login', ->
               if @user?
                 a href: '/', @user.screen_name

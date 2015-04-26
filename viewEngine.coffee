@@ -8,5 +8,6 @@ template = cc.compile templateFile,null # add common.coffee later
 module.exports = (filePath, options, callback)->
 	fs.readFile filePath, encoding: 'utf8',(err, c)->
 		throw err if err
+		console.log 'render'
 		options.body = cc.render c,options
 		callback null,template options
