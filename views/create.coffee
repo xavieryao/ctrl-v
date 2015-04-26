@@ -13,7 +13,7 @@ div ".row", ->
       div ".dropdown", ->
         button "#dropdownMenu1.btn.btn-default.dropdown-toggle", type: "button", "data-toggle": "dropdown", "aria-expanded": "true", ->
           b "Language"
-          span '.caret',''
+          icon 'caret'
         ul ".dropdown-menu", role: "menu", "aria-labelledby": "dropdownMenu1", ->
           li role: "presentation", ->
             a role: "menuitem", tabindex: "-1", href: "#", "JavaScript"
@@ -23,7 +23,7 @@ div ".row", ->
             a role: "menuitem", tabindex: "-1", href: "#", "Markdown"
           li role: "presentation", ->
             a role: "menuitem", tabindex: "-1", href: "#", "HTML"
-    div "#editor", """
+    div "#editor", @code or """
       function foo(items) {
         var x = "All this is syntax highlighted";
         return x;
