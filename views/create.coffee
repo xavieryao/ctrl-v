@@ -11,7 +11,7 @@ div ".row", ->
       div ".dropdown", ->
         button "#dropdownMenu1.btn.btn-default.dropdown-toggle", type: "button", "data-toggle": "dropdown", "aria-expanded": "true", ->
           b "Language"
-          icon 'caret'
+          span '.caret', ''
         ul ".dropdown-menu", role: "menu", "aria-labelledby": "dropdownMenu1", ->
           li role: "presentation", ->
             a role: "menuitem", tabindex: "-1", href: "#", "JavaScript"
@@ -28,7 +28,9 @@ div ".row", ->
       }
       """
   div ".col-xs-4", ->
-    button "#save.btn.btn-default", "Save"
+    button "#save.btn.btn-default", ->
+      icon 'floppy-disk'
+      text " Save"
 
 script src: '/javascripts/ace/ace.js'
 

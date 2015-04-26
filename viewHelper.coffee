@@ -1,6 +1,6 @@
 helper =
 	icon: (name)->
-		span '.' + name, ''
+		span ".glyphicon.glyphicon-#{name}", 'aria-hidden':'true'
 	alertDom: (type,msg)->
 		"""
 	<div class="alert alert-#{type}" role="alert">
