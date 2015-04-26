@@ -1,5 +1,3 @@
-div '.row', ->
-	div '#alert_placehoder', ''
 div ".row", ->  
   h2 ->
     text "Put your code here!"
@@ -32,7 +30,7 @@ div ".row", ->
   div ".col-xs-4", ->
     button "#save.btn.btn-default", "Save"
 
-script src: 'javascripts/ace/ace.js'
+script src: '/javascripts/ace/ace.js'
 
 coffeescript ->
 	editor = ace.edit 'editor'
