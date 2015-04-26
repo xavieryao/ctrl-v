@@ -10,6 +10,16 @@ getFilePath = (id,lang)->
 			extension = 'js'
 	path = __dirname + "/../../uploads/#{id}.#{extension}"
 
+router.get '/create',(req,res,next)->
+	console.log 'get'
+	if req.user
+		res.render 'create',user:req.user
+	else
+		
+		req.flash 'type','warning'
+		req.flash 'msg','You must login first'
+		res.redirect 'back'
+
 router.post '/create',(req,res,next)->
 	gist =
 		title : req.body.title
@@ -42,6 +52,9 @@ router.get '/:id',(req,res,next)->
 			path = getFilePath req.params.id,r.filetype
 			fs.readFile path,encoding:'utf8',(err,content)->
 				return next err if err
-				res.render 'create',code:content
+				res.render 'create',
+					code:content
+					user:req.user
+		else next()
 
 module.exports = router

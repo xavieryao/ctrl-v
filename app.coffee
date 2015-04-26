@@ -4,7 +4,8 @@ favicon = require 'serve-favicon'
 logger = require 'morgan'
 cookieParser = require 'cookie-parser'
 bodyParser = require 'body-parser'
-session = require 'express-session';
+session = require 'express-session'
+flash = require 'express-flash'
 
 auth = require './routes/auth'
 
@@ -21,7 +22,8 @@ app.use session
 	resave:false
 	saveUninitialized: false
 	secret: '42 is a magical number'
-app.use cookieParser()
+app.use cookieParser '42 is a magical number'
+app.use flash()
 app.use express.static path.join __dirname, '../public'
 
 app.use auth.middleware

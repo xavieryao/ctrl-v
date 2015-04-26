@@ -15,11 +15,11 @@ html ->
     nav ".navbar.navbar-default.navbar-fixed-top", ->
       div ".container", ->
         div ".navbar-header", ->
-          a ".navbar-brand", href: "#", "Gists"
+          a ".navbar-brand", href: "/", "Gists"
         div ".collapse.navbar-collapse", ->
           ul ".nav.navbar-nav", ->
-            li ".active", ->
-              a href: "#", "Create"
+            li ".active", -> # TODO solve the 'active' thing
+              a href: "/gists/create", "Create"
           ul '.nav.navbar-nav.navbar-right',->
             li '#login', ->
               if @user?
@@ -29,5 +29,9 @@ html ->
     div ".container", ->
       div ".starter-template", ->
         div '.row', ->
-          div '#alert_placehoder', ''
+          div '#alert_placehoder', ->
+              if @messages.msg?
+                comment 'got message'
+                alertDom @messages.type,@messages.msg
+              else comment 'no message'
         @body
