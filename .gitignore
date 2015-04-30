@@ -4,3 +4,4 @@ out/
 public/javascripts/out
 uploads
 npm-debug.log
+public/javascripts/ace/walk.coffee

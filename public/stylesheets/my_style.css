@@ -12,11 +12,17 @@ body {
 	min-height: 400px;
 }
 
-#control{
+.control{
 	padding-bottom: 10px;
-	padding-left: 20px;
+	padding-left: 12px;
 }
 
 .avatar {
 	max-height: 40px
+}
+
+.scrollable-menu {
+    height: auto;
+    max-height: 200px;
+    overflow-x: hidden;
 }

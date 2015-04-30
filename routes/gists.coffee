@@ -5,10 +5,7 @@ db = require '../db'
 router = express.Router()
 
 getFilePath = (id,lang)->
-	switch lang
-		when 'js'
-			extension = 'js'
-	path = __dirname + "/../../uploads/#{id}.#{extension}"
+	path = __dirname + "/../../uploads/#{id}.#{lang}"
 
 router.get '/create',(req,res,next)->
 	console.log 'get'
@@ -27,7 +24,7 @@ router.post '/create',(req,res,next)->
 	gist =
 		title : req.body.title
 		filetype : req.body.lang
-		description : 'NULL'
+		description : req.body.description || 'NULL'
 		uid : req.user.id
 
 	if req.body.description?
