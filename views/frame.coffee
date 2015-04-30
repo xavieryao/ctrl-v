@@ -35,3 +35,7 @@ html ->
                 alertDom @messages.type,@messages.msg
               else comment 'no message'
         @body
+      hr()
+      footer ->
+        p "&copy; PaperAirplane Dev Team"
+
