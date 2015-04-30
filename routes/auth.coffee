@@ -27,4 +27,8 @@ middleware.get '/login',passport.authenticate 'sina'
 middleware.get '/login/callback',passport.authenticate 'sina',
 	failureRedirect: '/aaa', successRedirect: '/'
 
+middleware.use (req,res,next)->
+	res.locals.user = req.user
+	next()
+
 exports.middleware = middleware

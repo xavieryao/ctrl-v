@@ -6,7 +6,7 @@ gists = require './gists'
 router = express.Router()
 
 router.get '/',(req,res,next)->
-	res.render 'index',user:req.user
+	res.render 'index'
 
 router.use '/users', users
 router.use '/gists', gists

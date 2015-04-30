@@ -9,7 +9,7 @@ getFilePath = (id,lang)->
 
 router.get '/create',(req,res,next)->
 	if req.user
-		res.render 'create',user:req.user
+		res.render 'create'
 	else
 		req.flash 'type','warning'
 		req.flash 'msg','You must login first'
@@ -55,7 +55,6 @@ router.get '/:id',(req,res,next)->
 					code:content
 					title:r.title
 					lang:r.filetype
-					user:req.user
 					description: r.description || undefined
 				res.render 'view',g
 		else next()
