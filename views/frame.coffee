@@ -18,7 +18,7 @@ html ->
           a ".navbar-brand", href: "/", "Gists"
         div ".collapse.navbar-collapse", ->
           ul ".nav.navbar-nav", ->
-            li ".active", -> # TODO solve the 'active' thing
+            li (".active" if @page is 'create'), ->
               a href: "/gists/create", "Create"
           ul '.nav.navbar-nav.navbar-right',->
             li '#login', ->
