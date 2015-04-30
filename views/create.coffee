@@ -324,10 +324,10 @@ div ".row", ->
             li '.divider',role:'presentation'
             li role: 'presentation', ->
               a role: 'menuitem',tabindex:'-1',href:'#','yaml'
-      div 'col-xs-3',->
+      div '.col-xs-3',->
         checkbox 'vim',' Enable Vim mode'
         comment 'Vim大法'    
-    div "#editor", @code or """
+    div "#editor", """
       function foo(items) {
         var x = "All this is syntax highlighted";
         return x;

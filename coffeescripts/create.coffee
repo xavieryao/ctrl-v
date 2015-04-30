@@ -8,15 +8,18 @@ $(document).ready ->
 			alert.warning 'Title can\'t be empty'
 			return
 		file = editor.getValue()
+		data =
+			code: file
+			lang: lang
+			title: $('#title').val().trim()
+		if $('#description').val().trim() isnt ''
+			data.description = $('#description').val().trim()
 		$.ajax
 			type: 'POST'
 			url: '/gists/create'
-			data:
-				code: file
-				lang: lang
-				title: 'test'
+			data: data
 			success: (r)->
-				alert.success r
+				window.location = "/gists/#{r}"
 			error: (xhr,err)->
 				alert.danger err
 	$('.dropdown-menu').on 'click', 'li a',->

@@ -25,7 +25,7 @@ html ->
               if @user?
                 a href: '/', @user.screen_name
               else
-                a href: '/login', 'Login'
+                a href: '/login', 'Log In'
     div ".container", ->
       div ".starter-template", ->
         div '.row', ->

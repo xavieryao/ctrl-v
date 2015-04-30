@@ -23,7 +23,7 @@ router.post '/create',(req,res,next)->
 	gist =
 		title : req.body.title
 		filetype : req.body.lang
-		description : req.body.description || 'NULL'
+		description : req.body.description || null
 		uid : req.user.id
 
 	if req.body.description?
@@ -39,7 +39,7 @@ router.post '/create',(req,res,next)->
 				console.error err
 				next err
 			else
-				res.send 'Good!  ' + path
+				res.send "#{r.insertId}"
 				res.end()
 
 router.get '/:id',(req,res,next)->
@@ -51,9 +51,13 @@ router.get '/:id',(req,res,next)->
 			path = getFilePath req.params.id,r.filetype
 			fs.readFile path,encoding:'utf8',(err,content)->
 				return next err if err
-				res.render 'create',
+				g =
 					code:content
+					title:r.title
+					lang:r.filetype
 					user:req.user
+					description: r.description || undefined
+				res.render 'view',g
 		else next()
 
 module.exports = router
