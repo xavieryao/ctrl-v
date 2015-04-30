@@ -18,7 +18,6 @@ config =
 
 passport.use new passportSina config,(accessToken, refreshToken, profile, callback)->
 	process.nextTick ->
-		console.log profile
 		callback null,profile
 
 middleware.use passport.initialize()

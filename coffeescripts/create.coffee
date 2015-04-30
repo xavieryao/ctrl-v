@@ -23,4 +23,8 @@ $(document).ready ->
 		lang = $(this).text().toLowerCase()
 		$('#dropdownLang').html """#{lang}<span class="caret"></span>"""
 		editor.getSession().setMode "ace/mode/#{lang}"
-
+	$('#vim').change ->
+		if this.checked
+			editor.setKeyboardHandler 'ace/keyboard/vim'
+		else
+			editor.setKeyboardHandler ''

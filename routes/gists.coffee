@@ -8,7 +8,6 @@ getFilePath = (id,lang)->
 	path = __dirname + "/../../uploads/#{id}.#{lang}"
 
 router.get '/create',(req,res,next)->
-	console.log 'get'
 	if req.user
 		res.render 'create',user:req.user
 	else
