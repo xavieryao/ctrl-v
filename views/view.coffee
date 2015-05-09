@@ -9,10 +9,12 @@ div ".row", ->
     comment "Editor"
     div "#editor", @code
   div ".col-xs-4", ->
-    button "#copy.btn.btn-default", ->
-      icon 'copy'
-      text " Copy"
+    row ->
+      a "#copy.btn.btn-default", ->
+        icon 'copy'
+        text " Copy"
 p '#lang',hidden:'hidden',@lang # replace this!
+p '#location',hidden:'hidden',@location
 
 script src: '/javascripts/ace/ace.js'
 script src: '/javascripts/out/view.js'

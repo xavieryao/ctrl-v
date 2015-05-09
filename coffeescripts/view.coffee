@@ -7,3 +7,5 @@ $(document).ready ->
 	$('#copy').click ->
 		window.clipboardData.clearData()
 		window.clipboardData.setData 'Text',editor.getValue()
+	$('#down').click ->
+		window.open $('#location').text()

@@ -23,9 +23,14 @@ passport.use new passportSina config,(accessToken, refreshToken, profile, callba
 middleware.use passport.initialize()
 middleware.use passport.session()
 
+middleware.get '/login/failed',(req,res,next)->
+	req.flash 'type','warning'
+	req.flash 'msg','Failed to log in.'
+	res.redirect '/'
+
 middleware.get '/login',passport.authenticate 'sina'
 middleware.get '/login/callback',passport.authenticate 'sina',
-	failureRedirect: '/aaa', successRedirect: '/'
+	failureRedirect: '/login/failed', successRedirect: '/'
 
 middleware.use (req,res,next)->
 	res.locals.user = req.user

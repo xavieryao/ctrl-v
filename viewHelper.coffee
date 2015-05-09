@@ -11,5 +11,7 @@ helper =
           label ->
             input "##{id}",type:'checkbox'
             text txt
+    row: (obj)->
+    	div '.row',obj
 
 module.exports = helper
