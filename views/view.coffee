@@ -5,10 +5,10 @@ div ".row", ->
     if @description
       small @description
 div ".row", ->
-  div ".col-xs-8", ->
+  div ".col-sm-10", ->
     comment "Editor"
     div "#editor", @code
-  div ".col-xs-4", ->
+  div ".col-sm-2", ->
     row ->
       a "#copy.btn.btn-default", ->
         icon 'copy'

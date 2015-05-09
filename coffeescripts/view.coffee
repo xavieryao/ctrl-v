@@ -1,7 +1,7 @@
 $(document).ready ->
 	lang = $('#lang').text()
 	editor = ace.edit 'editor'
-	editor.setTheme 'ace/theme/monokai'
+	editor.setTheme 'ace/theme/github'
 	editor.getSession().setMode "ace/mode/#{lang}"
 	editor.setReadOnly true
 	$('#copy').click ->

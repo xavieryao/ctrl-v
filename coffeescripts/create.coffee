@@ -1,7 +1,7 @@
 $(document).ready ->
 	lang = 'javascript'
 	editor = ace.edit 'editor'
-	editor.setTheme 'ace/theme/monokai'
+	editor.setTheme 'ace/theme/github'
 	editor.getSession().setMode 'ace/mode/javascript'
 	$('#save').click ->
 		if $('#title').val().trim() is ''
