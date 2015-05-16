@@ -1,11 +1,7 @@
 express = require 'express'
-fs = require 'fs'
-db = require '../db'
+Gist = require '../module/Gist'
 
 router = express.Router()
-
-getFilePath = (id,lang)->
-	path = __dirname + "/../../uploads/#{id}.#{lang}"
 
 router.get '/create',(req,res,next)->
 	if req.user
@@ -20,43 +16,23 @@ router.post '/create',(req,res,next)->
 		e = new Error 'Unauthorized'
 		e.status = 403
 		return next e
-	gist =
-		title : req.body.title
-		filetype : req.body.lang
-		description : req.body.description || null
-		uid : req.user.id
+
+	gist = Gist.createFromReq req,req.body.code
 
 	if req.body.description?
 		gist.description = req.body.description
 
-	sql = 'INSERT INTO gists SET ?'
-
-	db.query sql,gist,(err,r)->
-		throw err if err
-		path = getFilePath r.insertId,req.body.lang
-		fs.writeFile path,req.body.code,(err)->
-			if err
-				console.error err
-				next err
-			else
-				res.send "#{r.insertId}"
-				res.end()
+	gist.save (err,r)->
+		if err
+			next err
+		else
+			res.send "#{r}"
+			res.end()
 
 router.get '/:id',(req,res,next)->
-	sql = 'SELECT * FROM gists WHERE id = ?'
-	db.query sql,[req.params.id],(err,results,fields)->
-		return next err if err
-		if results.length != 0
-			r = results[0]
-			path = getFilePath req.params.id,r.filetype
-			fs.readFile path,encoding:'utf8',(err,content)->
-				return next err if err
-				g =
-					code:content
-					title:r.title
-					lang:r.filetype
-					description: r.description || undefined
-				res.render 'view',g
-		else next()
+	Gist.queryById req.params.id,(err,gist)->
+		if not err
+			res.render 'view',gist
+		else next err
 
 module.exports = router

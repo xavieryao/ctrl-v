@@ -13,7 +13,7 @@ passport.deserializeUser (user,callback)->
 config =
 	clientID: '1883039858'
 	clientSecret: '70685d6e33e13010d2745bab3ac4bbf1'
-	callbackURL :'http://127.0.0.1:3000/login/callback'
+	callbackURL :'http://xavier.papdt.com/login/callback'
 	requireState: false
 
 passport.use new passportSina config,(accessToken, refreshToken, profile, callback)->

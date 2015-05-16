@@ -22,6 +22,7 @@ $(document).ready ->
 				window.location = "/gists/#{r}"
 			error: (xhr,err)->
 				alert.danger err
+				console.log xhr.responseText
 	$('.dropdown-menu').on 'click', 'li a',->
 		lang = $(this).text().toLowerCase()
 		$('#dropdownLang').html """#{lang}<span class="caret"></span>"""

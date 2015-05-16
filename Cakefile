@@ -3,6 +3,7 @@
 task 'build', 'compile all files',->
 	run """coffee -o out -c ./*.coffee && 
   coffee -o out/routes -c ./routes/*.coffee &&
+  coffee -o out/module -c ./module/*.coffee &&
   coffee -o public/javascripts/out/ -c ./coffeescripts/*.coffee"""
 
 task 'clean', 'clean up compiled files',->
