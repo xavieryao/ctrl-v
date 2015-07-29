@@ -13,8 +13,11 @@ passport.deserializeUser (user,callback)->
 config =
 	clientID: '1883039858'
 	clientSecret: '70685d6e33e13010d2745bab3ac4bbf1'
-	callbackURL :'http://xavier.papdt.com/login/callback'
 	requireState: false
+
+if process.env.DEBUG
+	config.callbackURL = 'http://127.0.0.1:3000/login/callback'
+else config.callbackURL = 'http://xavier.papdt.com/login/callback'
 
 passport.use new passportSina config,(accessToken, refreshToken, profile, callback)->
 	process.nextTick ->

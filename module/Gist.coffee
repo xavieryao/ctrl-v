@@ -15,11 +15,12 @@ class Gist
 			filetype: @lang
 			uid: @uid
 			description: @description
-		db.query sql,set,(err,r)->
+		dbCallback = (err,r) =>
 			return callback err if err
 			@id = r.insertId
 			fs.writeFile @filePath(),@code,(fserr)->
 				callback fserr, r.insertId
+		db.query sql,set,dbCallback
 
 	@createFromReq: (req,code)->
 		new Gist req.body.title,req.body.lang,req.body.description,
@@ -27,17 +28,18 @@ class Gist
 
 	@queryById: (id,callback)->
 		sql = 'SELECT * FROM gists WHERE id = ?'
-		db.query sql,[id],(err,results,fields)->
+		db.query sql,[id],(err,results,fields)=>
 			return callback err if err
 			if results.length != 0
 				r = results[0]
 				gist = new Gist r.title,r.filetype,r.description,null,r.uid
+				gist.id = id
 				path = gist.filePath()
 				fs.readFile path,encoding:'utf8',(err,content)->
 					return callback err if err
 					gist.code = content
 					callback null, gist
-					
+
 			else callback new Error 'Query:Nothing matches.'
 
 module.exports = Gist
